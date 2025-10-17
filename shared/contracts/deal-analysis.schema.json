@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DealAnalysisMessage",
+  "type": "object",
+  "properties": {
+    "userId": { "type": "string" },
+    "destination": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "hotel": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "location": { "type": "string" },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "number" },
+        "pricePerNight": { "type": "number" },
+        "amenities": { "type": "array", "items": { "type": "string" } },
+        "availability": { "type": "boolean" },
+        "url": { "type": "string" }
+      },
+      "required": ["id", "name", "pricePerNight"]
+    },
+    "dealScore": { "type": "number" },
+    "savings": { "type": "number" },
+    "priceChange": { "type": "number" },
+    "historicalAverage": { "type": "number" },
+    "recommendation": { "type": "string", "enum": ["BOOK_NOW", "MONITOR", "WAIT"] },
+    "confidence": { "type": "number" }
+  },
+  "required": [
+    "userId",
+    "destination",
+    "timestamp",
+    "hotel",
+    "dealScore",
+    "savings",
+    "historicalAverage",
+    "recommendation",
+    "confidence"
+  ]
+}
+

@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  passwordHash  String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  watchlists    Watchlist[]
+  preferences   UserPreference?
+  interactions  UserInteraction[]
+
+  @@map("users")
+}
+
+model Watchlist {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  destination     String
+  checkInDate     DateTime
+  checkOutDate    DateTime
+  flexibleDates   Boolean  @default(false)
+  budget          Float
+  preferredStars  Int[]
+  preferredTypes  String[]
+  location        String
+  amenities       String[]
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+    
+  @@index([userId, active])
+  @@index([destination])
+  @@map("watchlists")
+}
+
+model PriceHistory {
+  id          String   @id @default(cuid())
+  hotelId     String
+  destination String
+  price       Float
+  recordedAt  DateTime @default(now())
+    
+  @@index([hotelId, destination])
+  @@index([recordedAt])
+  @@map("price_history")
+}
+
+model UserPreference {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  preferredStars      Int[]
+  maxPricePerNight    Float
+  preferredLocations  String[]
+  requiredAmenities   String[]
+  preferredTypes      String[]
+  learningAccuracy    Float    @default(0.72)
+  updatedAt           DateTime @updatedAt
+
+  @@map("user_preferences")
+}
+
+model UserInteraction {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hotelId   String
+  action    String
+  dealData  String   @db.Text
+  createdAt DateTime @default(now())
+    
+  @@index([userId, action])
+  @@index([createdAt])
+  @@map("user_interactions")
+}
+
+model AgentActivity {
+  id        String   @id @default(cuid())
+  agentType String
+  action    String
+  details   String   @db.Text
+  createdAt DateTime @default(now())
+    
+  @@index([createdAt])
+  @@index([agentType])
+  @@map("agent_activities")
+}
