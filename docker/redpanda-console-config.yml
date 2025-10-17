@@ -1,0 +1,34 @@
+redpanda:
+  brokers: ["redpanda:9092"]
+  schemaRegistry:
+    enabled: true
+    urls: ["http://redpanda:8081"]
+
+kafka:
+  clusters:
+    - name: local
+      brokers: ["redpanda:9092"]
+      registry: "http://redpanda:8081"
+
+connect:
+  enabled: false
+
+schema:
+  enabled: true
+
+topics:
+  enabled: true
+  allowCreate: true
+  allowDelete: true
+
+consumerGroups:
+  enabled: true
+
+auditLog:
+  enabled: false
+
+rbac:
+  enabled: false
+
+login:
+  enabled: false

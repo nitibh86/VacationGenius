@@ -1,0 +1,52 @@
+{
+  "name": "vacation-genius",
+  "version": "1.0.0",
+  "description": "AI Travel Deal Optimizer - Autonomous travel agent that monitors deals 24/7",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "agents/scraper-analyzer",
+    "agents/personalization-email"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:scraper\" \"npm run dev:personalizer\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:scraper": "cd agents/scraper-analyzer && npm run dev",
+    "dev:personalizer": "cd agents/personalization-email && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "db:generate": "cd backend && npx prisma generate",
+    "db:push": "cd backend && npx prisma db push",
+    "db:studio": "cd backend && npx prisma studio",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "install:all": "npm install && npm run install:frontend && npm run install:backend && npm run install:scraper && npm run install:personalizer",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && npm install",
+    "install:scraper": "cd agents/scraper-analyzer && npm install",
+    "install:personalizer": "cd agents/personalization-email && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "travel",
+    "ai",
+    "agents",
+    "deals",
+    "vacation",
+    "hackathon",
+    "apify",
+    "redpanda",
+    "stackai"
+  ],
+  "author": "VacationGenius Team",
+  "license": "MIT"
+}

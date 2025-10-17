@@ -1,0 +1,38 @@
+{
+  "name": "vacation-genius-personalization-email",
+  "version": "1.0.0",
+  "description": "Personalization and Email Agent for VacationGenius - Redpanda consumer with StackAI",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4",
+    "axios": "^1.6.2",
+    "resend": "^2.0.0",
+    "dotenv": "^16.3.1",
+    "winston": "^3.11.0",
+    "@prisma/client": "^5.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "tsx": "^4.6.2",
+    "typescript": "^5.3.3",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.8"
+  },
+  "keywords": [
+    "personalization",
+    "email",
+    "kafka",
+    "redpanda",
+    "stackai",
+    "travel",
+    "agent"
+  ],
+  "author": "VacationGenius Team",
+  "license": "MIT"
+}
